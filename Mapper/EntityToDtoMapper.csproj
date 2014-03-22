@@ -62,9 +62,7 @@
     <Compile Include="Entities\Cigar.cs" />
     <Compile Include="Entities\Humidor.cs" />
     <Compile Include="HumidorContext.cs" />
-    <Compile Include="DtoClass.cs" />
     <Compile Include="DtoMapper.cs" />
-    <Compile Include="EntityClass.cs" />
     <Compile Include="MapMe.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

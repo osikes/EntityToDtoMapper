@@ -15,22 +15,17 @@ namespace EntityToDtoMapper
 
     public class DtoMapper
     {
-
         private static MapReturn IsPropertyTagged(PropertyInfo property)
         {
             foreach (object attribute in property.GetCustomAttributes(true))
             {
                 if (attribute is MapMe)
                 {
-                    //look for addition info
-                    //var internalProperties = attribute.GetType().GetProperties().Where(p => p.Name == "FindEntity"|| p.Name== "FindProperty");
-
                     return new MapReturn()
                     {
                         MapMe = (MapMe)attribute,
                         Found = true
                     };
-
                 }
             }
             return new MapReturn()
@@ -40,17 +35,17 @@ namespace EntityToDtoMapper
             };
         }
 
-        static bool GetValue(object currentObject, string propName, out object value)
+        static bool GetValue(object currentObject, string propName, out object value,string entityName="")
         {
             // call helper function that keeps track of which objects we've seen before
-            return GetValue(currentObject, propName, out value, new HashSet<object>());
+            return GetValue(currentObject, propName, out value, new HashSet<object>(),entityName);
         }
 
         static bool GetValue(object currentObject, string propName, out object value,
-                             HashSet<object> searchedObjects)
+                             HashSet<object> searchedObjects,string entityName="")
         {
             PropertyInfo propInfo = currentObject.GetType().GetProperty(propName);
-            if (propInfo != null)
+            if (propInfo != null && (String.IsNullOrEmpty(entityName) || propInfo.Name == entityName))
             {
                 value = propInfo.GetValue(currentObject, null);
                 return true;
@@ -71,7 +66,7 @@ namespace EntityToDtoMapper
             return false;
         }
 
-        public static Dto Map<Entity, Dto>(object instance)
+        public static Dto Map<Entity,Dto>(object instance)
         {
             var target = (Dto)Activator.CreateInstance(typeof(Dto));
 
@@ -80,39 +75,30 @@ namespace EntityToDtoMapper
                 var MapReturnResult = IsPropertyTagged(dtoProperty);
                 if (MapReturnResult.Found)
                 {
-                    if (MapReturnResult.MapMe.FindEntity.Length > 0)
+                    object newValue;
+
+                    GetValue(instance, (MapReturnResult.MapMe.FindEntity.Length > 0? MapReturnResult.MapMe.FindProperty : dtoProperty.Name), out newValue,MapReturnResult.MapMe.FindEntity);
+                    var targetProp = target.GetType().GetProperties().Where(p => p.Name == dtoProperty.Name).Single();
+
+                    if(newValue.GetType().GetProperties().Count() == 0 ||
+                        (newValue.GetType().GetProperties().Any(prop=>!IsPropertyTagged(prop).Found)))//child property contains properties other than MapMe attribute
                     {
-
-                        foreach (var entityProperty in (typeof(Entity).GetProperties()))
-                        {
-                            if (MapReturnResult.MapMe.FindEntity == entityProperty.Name)   //look for property matching Entity
-                            { }
-                            object newObject = entityProperty.GetValue(instance, null);
-
-                            if (newObject != null)
-                            {
-                                PropertyInfo propInfo = newObject.GetType().GetProperty(MapReturnResult.MapMe.FindProperty);
-                                if (propInfo != null)
-                                {
-                                    var entityValue = propInfo.GetValue(newObject, null);
-                                    var targetProp = target.GetType().GetProperties().Where(p => p.Name == dtoProperty.Name).Single();
-                                    targetProp.SetValue(target, entityValue, new object[] { });
-                                }
-                            }
-                        }
+                       targetProp.SetValue(target, newValue, new object[] { });
                     }
-
-                    else
-                    {
-                        //standard case
-                        foreach (var entityProperty in (typeof(Entity).GetProperties()))
+                    else{
+                        if (newValue.GetType().GetProperties().Count() > 0)//we're assuming the proprety is flagged as MapMe is itself a class instance and needs to to explored
                         {
-                            if (dtoProperty.Name == entityProperty.Name)
-                            {
-                                var entityValue = entityProperty.GetValue(instance, new object[] { });
-                                var targetProp = target.GetType().GetProperties().Where(p => p.Name == dtoProperty.Name).Single();
-                                targetProp.SetValue(target, entityValue, new object[] { });
-                            }
+                            var dtoTypeArgument = Type.GetType(dtoProperty.PropertyType.FullName);
+                            
+                            var entityTypeArgument= Type.GetType(newValue.GetType().FullName);
+
+                            var mapMethod = typeof(DtoMapper).GetMethod("Map");
+
+                            var genericMapMethod = mapMethod.MakeGenericMethod(entityTypeArgument, dtoTypeArgument);
+
+                            var result = genericMapMethod.Invoke(newValue, new object[] { newValue });
+
+                            targetProp.SetValue(target, result, new object[] { });
                         }
                     }
                 }

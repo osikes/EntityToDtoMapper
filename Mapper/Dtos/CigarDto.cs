@@ -16,6 +16,9 @@ namespace EntityToDtoMapper.Dtos
         [MapMe]
         public int HumidorId { get; set; }
 
+        [MapMe]
+        public HumidorDto Humidor { get; set; }
+
         [MapMe("Humidor","Name")]
         public string HumidorName { get; set; }
     }
