@@ -1,0 +1,4 @@
+C:\Users\Owen\admin\Mapper\Mapper\bin\Debug\Mapper.exe
+C:\Users\Owen\admin\Mapper\Mapper\bin\Debug\Mapper.pdb
+C:\Users\Owen\admin\Mapper\Mapper\obj\Debug\Mapper.exe
+C:\Users\Owen\admin\Mapper\Mapper\obj\Debug\Mapper.pdb
