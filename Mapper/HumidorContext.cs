@@ -16,6 +16,7 @@ namespace EntityToDtoMapper
         {
         }
         public DbSet<Humidor> Humidors { get; set; }
+        public DbSet<Cigar> Cigars { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

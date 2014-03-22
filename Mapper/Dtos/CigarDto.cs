@@ -7,10 +7,16 @@ namespace EntityToDtoMapper.Dtos
 {
     public class CigarDto
     {
-        public int CigarId{get;set;}
+        [MapMe]
+        public int CigarId { get;set; }
 
-        public string CigarName { get; set; }
+        [MapMe]
+        public string Name { get; set; }
 
+        [MapMe]
+        public int HumidorId { get; set; }
+
+        [MapMe("Humidor","Name")]
         public string HumidorName { get; set; }
     }
 }

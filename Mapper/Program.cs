@@ -13,7 +13,7 @@ namespace EntityToDtoMapper
         {
             var repository = new HumidorRepository();
 
-            var dtos = repository.GetHumidors();
+            var dtos = repository.GetCigars();
         }
     }
 } 

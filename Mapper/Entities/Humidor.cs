@@ -8,9 +8,10 @@ namespace EntityToDtoMapper.Entities
 {
     public class Humidor
     {
-         [Key, MapMe]
+        [Key, MapMe]
         public int HumidorId { get; set; }
-           [MapMe]
+        
+        [MapMe]
         public string Name { get; set; }
 
     }
