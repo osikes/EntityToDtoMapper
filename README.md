@@ -10,6 +10,7 @@ Example:
 public class TestDto{
 
   [MapMe]
+  
   public int Id {get;set;}
 
   public string Name {get;set;}
