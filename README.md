@@ -32,20 +32,27 @@ In many cases, a dto represents some entity, and perhaps some additional relatio
 Example: You might have a Car entity class, and there might also be a CarModel entity class, where Car might have a foreign key reference to CarModel, 
 
 public class Car {
+ 
   public int Id {get;set;}
+  
   public int CarModelId {get;set;}
+ 
   public virtual CarModel CarModel {get;set;}
 }
 
 public class CarModel {
+ 
   public int Id {get;set;}
+ 
   public string CarModelName {get;set;}
+ 
   public virtual ICollection<Car> Cars{get;set;}
 }
 
 You might then have a CarDto where you don't want to represent the entire object hierchy, but it might be useful to have the CarModelName available. You can setup a MapMe attribute to do this!
 
 public class CarDto{
+  
   public int Id {get;set;}
   
   public int CarModelId {get;set;}
@@ -54,6 +61,10 @@ public class CarDto{
   
   public string CarModelName {get;set;}
 }
+
+
+If you Dto class has a child dto you can make that with the MapMe as well. The DtoMapper.Map method, will then look at that Dto and it's child properties for any MapMe attributes, and so forth.
+
 
 
 
