@@ -17,6 +17,7 @@ public class TestDto{
 }
 
 public class Test //this is a entity class
+
 {
   public int Id {get;set;}
 }
