@@ -6,7 +6,7 @@ using System.Text;
 
 namespace EntityToDtoMapper
 {
-    public class MapReturn
+    internal class MapReturn
     {
         
         public MapMe MapMe{get;set;}
@@ -92,7 +92,7 @@ namespace EntityToDtoMapper
                             
                             var entityTypeArgument= Type.GetType(newValue.GetType().FullName);
 
-                            var mapMethod = typeof(DtoMapper).GetMethod("Map");
+                            var mapMethod = typeof(DtoMapper).GetMethod(System.Reflection.MethodBase.GetCurrentMethod().Name);
 
                             var genericMapMethod = mapMethod.MakeGenericMethod(entityTypeArgument, dtoTypeArgument);
 
