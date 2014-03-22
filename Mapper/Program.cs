@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EntityToDtoMapper.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -10,16 +11,9 @@ namespace EntityToDtoMapper
     {
         static void Main(string[] args)
         {
-            var ef = new EntityClass()
-            {
-                Id = 1,
-                Name = "df",
-                Bob = "asdf"
-            };
+            var repository = new HumidorRepository();
 
-            var dto = DtoMapper.Map<EntityClass, DtoClass>(ef);
-
-            Console.WriteLine(dto.Id.ToString());
+            var dtos = repository.GetHumidors();
         }
     }
 } 

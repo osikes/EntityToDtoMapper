@@ -2,3 +2,17 @@ C:\Users\Owen\admin\Mapper\Mapper\bin\Debug\Mapper.exe
 C:\Users\Owen\admin\Mapper\Mapper\bin\Debug\Mapper.pdb
 C:\Users\Owen\admin\Mapper\Mapper\obj\Debug\Mapper.exe
 C:\Users\Owen\admin\Mapper\Mapper\obj\Debug\Mapper.pdb
+C:\Users\Owen\Documents\GitHub\EntityToDtoMapper\Mapper\obj\Debug\Mapper.exe
+C:\Users\Owen\Documents\GitHub\EntityToDtoMapper\Mapper\obj\Debug\Mapper.pdb
+C:\Users\Owen\Documents\GitHub\EntityToDtoMapper\Mapper\obj\Debug\EntityToDtoMapper.csprojResolveAssemblyReference.cache
+C:\Users\Owen\Documents\GitHub\EntityToDtoMapper\Mapper\bin\Debug\TestDb.sdf
+C:\Users\Owen\Documents\GitHub\EntityToDtoMapper\Mapper\bin\Debug\Mapper.exe.config
+C:\Users\Owen\Documents\GitHub\EntityToDtoMapper\Mapper\bin\Debug\Mapper.exe
+C:\Users\Owen\Documents\GitHub\EntityToDtoMapper\Mapper\bin\Debug\Mapper.pdb
+C:\Users\Owen\Documents\GitHub\EntityToDtoMapper\Mapper\bin\Debug\EntityFramework.dll
+C:\Users\Owen\Documents\GitHub\EntityToDtoMapper\Mapper\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Owen\Documents\GitHub\EntityToDtoMapper\Mapper\bin\Debug\EntityFramework.xml
+C:\Users\Owen\Documents\GitHub\EntityToDtoMapper\Mapper\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Owen\Documents\GitHub\EntityToDtoMapper\Mapper\bin\Debug\EntityFramework.SqlServerCompact.dll
+C:\Users\Owen\Documents\GitHub\EntityToDtoMapper\Mapper\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\Owen\Documents\GitHub\EntityToDtoMapper\Mapper\bin\Debug\EntityFramework.SqlServerCompact.xml
